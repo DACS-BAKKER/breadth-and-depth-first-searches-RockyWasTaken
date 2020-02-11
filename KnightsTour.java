@@ -39,6 +39,7 @@ public class KnightsTour {
 
     //Solve the problem with a stack
     public static void solveStack(){
+        long start = System.currentTimeMillis();
         stackSolver.push(new StorageNode(new KTNode(board, new KTNode(new ChessBoard(board.nullBoard()), null))));
         while(!stackSolver.top.ktNode.chessBoard.isSolved()){
             if(stackSolver.top.ktNode.chessBoard.next <= 8){
@@ -51,9 +52,12 @@ public class KnightsTour {
                 stackSolver.pop();
             }
         }
+        long end = System.currentTimeMillis();
+        double time = (end - start)/1000;
 
         if(stackSolver.top.ktNode.chessBoard.isSolved()){
-            System.out.println("Solution: \n");
+            System.out.println("Solution: ");
+            System.out.println("Time taken: " + time + " seconds");
             KTNode temp = stackSolver.pop().ktNode;
             Stack solution = new Stack();
 
@@ -73,6 +77,7 @@ public class KnightsTour {
 
     //Solves the problem with a queue
     public static void solveQueue(){
+        long start = System.currentTimeMillis();
         queueSolver.enqueue(new StorageNode(new KTNode(board, new KTNode(new ChessBoard(board.nullBoard()), null))));
         StorageNode tempNode = queueSolver.dequeue();
         for(int i = 0; i < 8; i++){
@@ -91,9 +96,12 @@ public class KnightsTour {
                 }
             }
         }
+        long end = System.currentTimeMillis();
+        double time = (end - start)/1000;
 
         if(queueSolver.first.ktNode.chessBoard.isSolved()){
             System.out.println("Solution: ");
+            System.out.println("Time taken: " + time + " seconds");
             KTNode temp = queueSolver.dequeue().ktNode;
             Stack solution = new Stack();
 
