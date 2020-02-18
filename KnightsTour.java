@@ -41,7 +41,7 @@ public class KnightsTour {
     public static void solveStack(){
         long start = System.currentTimeMillis();
         stackSolver.push(new StorageNode(new KTNode(board, new KTNode(new ChessBoard(board.nullBoard()), null))));
-        while(!stackSolver.top.ktNode.chessBoard.isSolved()){
+        while(!stackSolver.isEmpty() && !stackSolver.top.ktNode.chessBoard.isSolved()){
             if(stackSolver.top.ktNode.chessBoard.next <= 8){
                 ChessBoard temp = stackSolver.top.ktNode.chessBoard.getNext();
                 if(!isNullBoard(temp)){
@@ -57,7 +57,6 @@ public class KnightsTour {
 
         if(stackSolver.top.ktNode.chessBoard.isSolved()){
             System.out.println("Solution: ");
-            System.out.println("Time taken: " + time + " seconds");
             KTNode temp = stackSolver.pop().ktNode;
             Stack solution = new Stack();
 
@@ -69,6 +68,8 @@ public class KnightsTour {
             while(!solution.isEmpty()){
                 System.out.println(solution.pop().ktNode.chessBoard);
             }
+
+            System.out.println("Time taken: " + time + " seconds");
         }
         else if(stackSolver.isEmpty()){
             System.out.println("No solution");
@@ -87,7 +88,7 @@ public class KnightsTour {
             }
         }
 
-        while(!queueSolver.first.ktNode.chessBoard.isSolved() && !queueSolver.isEmpty()){
+        while(!queueSolver.isEmpty() && !queueSolver.first.ktNode.chessBoard.isSolved()){
             StorageNode count = queueSolver.dequeue();
             while(count.ktNode.chessBoard.next <= 8){
                 ChessBoard temp = count.ktNode.chessBoard.getNext();
@@ -101,7 +102,6 @@ public class KnightsTour {
 
         if(queueSolver.first.ktNode.chessBoard.isSolved()){
             System.out.println("Solution: ");
-            System.out.println("Time taken: " + time + " seconds");
             KTNode temp = queueSolver.dequeue().ktNode;
             Stack solution = new Stack();
 
@@ -113,6 +113,8 @@ public class KnightsTour {
             while(!solution.isEmpty()){
                 System.out.println(solution.pop().ktNode.chessBoard);
             }
+
+            System.out.println("Time taken: " + time + " seconds");
         }
         else if(queueSolver.isEmpty()){
             System.out.println("No solution");
